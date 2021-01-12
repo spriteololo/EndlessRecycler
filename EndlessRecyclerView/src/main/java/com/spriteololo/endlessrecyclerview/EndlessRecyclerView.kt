@@ -9,7 +9,7 @@ import androidx.annotation.IntRange
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class EndlessRecyclerView : RecyclerView {
+public class EndlessRecyclerView : RecyclerView {
     private val HANDLER = Handler(Looper.getMainLooper())
     private var progressLayoutId = 0
     private var mVisibleThreshold: Int = DEFAULT_VISIBLE_THRESHOLD
