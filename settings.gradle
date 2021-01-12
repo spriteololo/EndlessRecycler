@@ -1,2 +1,3 @@
+include ':EndlessRecyclerView'
 include ':app'
 rootProject.name = "EndlessRecycler"
