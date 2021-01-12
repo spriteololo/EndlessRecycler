@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class ProgressViewHolder(itemView: View) : ViewHolder(itemView) {
+open class ProgressViewHolder(itemView: View) : ViewHolder(itemView) {
     companion object {
         fun inflate(@LayoutRes layoutResId: Int, parent: ViewGroup): ProgressViewHolder {
             val view = LayoutInflater.from(parent.context)
