@@ -10,7 +10,7 @@ import com.spriteololo.endlessrecyclerview.ProgressViewHolder.Companion.inflate
 
 class ProgressAdapterWrapper(
     private val progressLayoutId: Int,
-    val innerAdapter: EndlessAdapter<EndlessViewHolder>,
+    val innerAdapter: BaseEndlessAdapter<BaseEndlessViewHolder>,
     var progressEnabled: Boolean
 ) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -31,13 +31,13 @@ class ProgressAdapterWrapper(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (!progressEnabled || position != getProgressPosition()) {
-            innerAdapter.onBindViewHolder(holder as EndlessViewHolder, position)
+            innerAdapter.onBindViewHolder(holder as BaseEndlessViewHolder, position)
         }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         if (!progressEnabled || position != getProgressPosition()) {
-            innerAdapter.onBindViewHolder(holder as EndlessViewHolder, position, payloads)
+            innerAdapter.onBindViewHolder(holder as BaseEndlessViewHolder, position, payloads)
         }
     }
 
@@ -71,7 +71,7 @@ class ProgressAdapterWrapper(
         if (holder is ProgressViewHolder) {
             super.onViewRecycled(holder)
         } else {
-            innerAdapter.onViewRecycled(holder as EndlessViewHolder)
+            innerAdapter.onViewRecycled(holder as BaseEndlessViewHolder)
         }
     }
 
@@ -84,19 +84,19 @@ class ProgressAdapterWrapper(
         return if (holder.adapterPosition == getProgressPosition()) {
             super.onFailedToRecycleView(holder)
         } else {
-            innerAdapter.onFailedToRecycleView(holder as EndlessViewHolder)
+            innerAdapter.onFailedToRecycleView(holder as BaseEndlessViewHolder)
         }
     }
 
     override fun onViewAttachedToWindow(holder: ViewHolder) {
         if (holder.adapterPosition != getProgressPosition()) {
-            innerAdapter.onViewAttachedToWindow(holder as EndlessViewHolder)
+            innerAdapter.onViewAttachedToWindow(holder as BaseEndlessViewHolder)
         }
     }
 
     override fun onViewDetachedFromWindow(holder: ViewHolder) {
         if (holder.adapterPosition != getProgressPosition()) {
-            innerAdapter.onViewAttachedToWindow(holder as EndlessViewHolder)
+            innerAdapter.onViewAttachedToWindow(holder as BaseEndlessViewHolder)
         }
     }
 

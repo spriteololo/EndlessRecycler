@@ -77,7 +77,7 @@ class EndlessRecyclerView : RecyclerView {
 
         mAdapter = if (adapter != null) {
             val progressEnabled = endlessScrollEnabled && progressLayoutId != 0
-            ProgressAdapterWrapper(progressLayoutId, adapter as EndlessAdapter<EndlessViewHolder>, progressEnabled)
+            ProgressAdapterWrapper(progressLayoutId, adapter as BaseEndlessAdapter<BaseEndlessViewHolder>, progressEnabled)
         } else {
             null
         }
@@ -171,7 +171,7 @@ class EndlessRecyclerView : RecyclerView {
         }
     }
 
-    override fun getAdapter(): EndlessAdapter<EndlessViewHolder>? {
+    override fun getAdapter(): BaseEndlessAdapter<BaseEndlessViewHolder>? {
         return mAdapter?.innerAdapter
     }
 

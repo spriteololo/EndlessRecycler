@@ -3,14 +3,12 @@ package com.sprite.endlessrecycler
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.spriteololo.endlessrecyclerview.EndlessAdapter
+import com.spriteololo.endlessrecyclerview.BaseEndlessViewHolder
 import com.spriteololo.endlessrecyclerview.EndlessRecyclerView
-import com.spriteololo.endlessrecyclerview.EndlessViewHolder
+import com.spriteololo.endlessrecyclerview.LightEndlessAdapter
 
 class MainActivity : AppCompatActivity(), EndlessRecyclerView.EndlessScrollListener {
     lateinit var adapter: LolAdapter
@@ -32,31 +30,19 @@ class MainActivity : AppCompatActivity(), EndlessRecyclerView.EndlessScrollListe
     }
 }
 
-class LolAdapter : EndlessAdapter<LolAdapter.CustomViewHolder>() {
-    private val items: ArrayList<String> = arrayListOf("0", "1", "2")
+class LolAdapter : LightEndlessAdapter<LolAdapter.CustomViewHolder, String>() {
 
-    class CustomViewHolder(view: View) : EndlessViewHolder(view) {
-        val tv: TextView = view.findViewById(R.id.tv_title)
-    }
+    override val itemLayoutRes = R.layout.item_text
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-        val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_text, parent, false)
+    override fun createViewHolder(view: View): CustomViewHolder {
         return CustomViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val item = items[position]
+    override fun bindElementAt(holder: CustomViewHolder, position: Int, item: String) {
         holder.tv.text = item
     }
 
-    fun addItems() {
-        val size = items.size
-        items.add(size.toString())
-        notifyItemInserted(size)
+    class CustomViewHolder(view: View) : BaseEndlessViewHolder(view) {
+        val tv: TextView = view.findViewById(R.id.tv_title)
     }
 }
