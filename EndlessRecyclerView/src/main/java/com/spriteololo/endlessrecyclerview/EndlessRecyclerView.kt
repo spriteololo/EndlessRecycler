@@ -9,7 +9,7 @@ import androidx.annotation.IntRange
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-public class EndlessRecyclerView : RecyclerView {
+class EndlessRecyclerView : RecyclerView {
     private val HANDLER = Handler(Looper.getMainLooper())
     private var progressLayoutId = 0
     private var mVisibleThreshold: Int = DEFAULT_VISIBLE_THRESHOLD
@@ -77,7 +77,7 @@ public class EndlessRecyclerView : RecyclerView {
 
         mAdapter = if (adapter != null) {
             val progressEnabled = endlessScrollEnabled && progressLayoutId != 0
-            ProgressAdapterWrapper(progressLayoutId, adapter as Adapter<ViewHolder>, progressEnabled)
+            ProgressAdapterWrapper(progressLayoutId, adapter as EndlessAdapter<EndlessViewHolder>, progressEnabled)
         } else {
             null
         }
@@ -171,7 +171,7 @@ public class EndlessRecyclerView : RecyclerView {
         }
     }
 
-    override fun getAdapter(): Adapter<ViewHolder>? {
+    override fun getAdapter(): EndlessAdapter<EndlessViewHolder>? {
         return mAdapter?.innerAdapter
     }
 

@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.spriteololo.endlessrecyclerview.EndlessAdapter
 import com.spriteololo.endlessrecyclerview.EndlessRecyclerView
+import com.spriteololo.endlessrecyclerview.EndlessViewHolder
 
 class MainActivity : AppCompatActivity(), EndlessRecyclerView.EndlessScrollListener {
     lateinit var adapter: LolAdapter
@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity(), EndlessRecyclerView.EndlessScrollListe
         setContentView(R.layout.activity_main)
 
         val recycler = findViewById<EndlessRecyclerView>(R.id.recycler)
-        recycler.layoutManager = GridLayoutManager(this, 5)
         with(LolAdapter()) {
             adapter = this
             recycler.setAdapter(this)
@@ -33,10 +32,10 @@ class MainActivity : AppCompatActivity(), EndlessRecyclerView.EndlessScrollListe
     }
 }
 
-class LolAdapter : RecyclerView.Adapter<LolAdapter.CustomViewHolder>() {
+class LolAdapter : EndlessAdapter<LolAdapter.CustomViewHolder>() {
     private val items: ArrayList<String> = arrayListOf("0", "1", "2")
 
-    class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class CustomViewHolder(view: View) : EndlessViewHolder(view) {
         val tv: TextView = view.findViewById(R.id.tv_title)
     }
 
